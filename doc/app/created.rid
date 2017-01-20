@@ -1,0 +1,7 @@
+Fri, 20 Jan 2017 23:04:43 +0900
+README.rdoc	Fri, 20 Jan 2017 19:43:53 +0900
+app/controllers/application_controller.rb	Fri, 20 Jan 2017 19:43:53 +0900
+app/controllers/hello_controller.rb	Fri, 20 Jan 2017 22:33:40 +0900
+app/helpers/application_helper.rb	Fri, 20 Jan 2017 19:43:53 +0900
+app/helpers/hello_helper.rb	Fri, 20 Jan 2017 20:44:56 +0900
+app/models/book.rb	Fri, 20 Jan 2017 22:21:42 +0900
