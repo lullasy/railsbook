@@ -4,6 +4,12 @@ class Book < ActiveRecord::Base
   has_many :users, through: :reviews
   has_many :memos, as: :memoable
 
+  # after_destroy :history_book
+  after_destroy do |b|
+    logger.info('deleted: ' + b.inspect)
+  end
+
+
   scope :gihyo, -> { where(publish: '技術評論社') }
   scope :newer, -> { order(published: :desc) }
   scope :top10, -> { newer.limit(10) }
@@ -21,4 +27,9 @@ class Book < ActiveRecord::Base
   validates :publish,
     inclusion: { in: ['技術評論社', '翔泳社', '秀和システム', '日経BP社', 'ソシム'] }
 
+
+  private
+  def history_book
+    logger.info('deleted: ' + self.inspect)
+  end
 end
