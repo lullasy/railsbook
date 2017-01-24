@@ -1,6 +1,24 @@
 require 'kconv'
 
 class CtrlController < ApplicationController
+
+  # before_action :start_logger, only: [:index, :index2]
+  # after_action :end_logger, except: :index
+  # around_action :around_logger
+  # skip_action_callback :mylogging
+
+  before_action :auth, only: :index
+
+  def index
+    # sleep 3
+    render text: 'index だよー'
+  end
+
+  def index2
+    # sleep 3
+    render text: 'index2 だよー'
+  end
+
   def para
     render text: 'idぱらめた：' + params[:id]
   end
@@ -75,5 +93,46 @@ class CtrlController < ApplicationController
 
   def download
     @books = Book.all
+  end
+
+  def cookie
+    @email = cookies[:email]
+  end
+
+  def cookie_rec
+    cookies[:email] = { value: params[:email], expires: 3.months.from_now, http_only: true }
+    render text: 'くっきーたべたよ'
+  end
+
+  def session_show
+    @email = session[:email]
+  end
+
+  def session_rec
+    session[:email] = params[:email]
+    render text: 'せっしょんのこしたよー'
+  end
+
+  private
+  def start_logger
+    logger.debug('[Start] ' + Time.now.to_s)
+  end
+
+  def end_logger
+    logger.debug('[Finish] ' + Time.now.to_s)
+  end
+
+  def around_logger
+    logger.debug('[Start] ' + Time.now.to_s)
+    yield
+    logger.debug('[Finish] ' + Time.now.to_s)
+  end
+
+  def auth
+    name = 'yyamada'
+    passwd = '8cb2237d0679ca88db6464eac60da96345513964'
+    authenticate_or_request_with_http_basic('Railsbook') do |n, p|
+      n == name && Digest::SHA1.hexdigest(p) == passwd
+    end
   end
 end
