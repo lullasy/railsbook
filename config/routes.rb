@@ -1,10 +1,41 @@
+require 'TimeConstraint'
+
 Rails.application.routes.draw do
   resources :members
   resources :fan_comments
   resources :reviews
   resources :authors
-  resources :users
+  resources :users, except: [ :show, :destroy ]
   resources :books
+
+  # resources :reviews do
+  #   get :unapproval, on: :collection
+  #   get :draft, on: :member
+  # end
+
+  # "浅い"URL p.386
+  # resources :books do
+  #   resources :reviews, shallow: true
+  # end
+
+  # TODO: namespace, scope, module まわり：http://qiita.com/blueplanet/items/522cc8364f6cf189ecad
+  # namespace :admin do
+  #   resources :books, format: false
+  # end
+
+  # id に制限かけたいとき
+  # resources :books, constraints: { id: /[0-9]{1,2}/ }
+
+  # 独自関数でやりたいとき　元ファイルはmodels/に置く
+  # resources :books, constraints: TimeConstraint.new
+
+  # 復数指定したいとき
+  # constraints(id: /[0-9]{1,2}/) do
+  #   resources :books
+  #   resources :reviews
+  # end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -59,5 +90,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  match ':controller(/:action(/:id))', via: [ :get, :post, :patch ]
+
+  root to: 'books#index'
 end
