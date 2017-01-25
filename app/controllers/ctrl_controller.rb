@@ -42,7 +42,7 @@ class CtrlController < ApplicationController
     if !perms.include?(File.extname(name).downcase)
       result = '画像だけおっけーだよ〜'
     elsif file.size > 1.megabyte
-      resilt = 'ファイルサイズは1MBまでだよ〜'
+      result = 'ファイルサイズは1MBまでだよ〜'
     else
       name = name.kconv(Kconv::SJIS, Kconv::UTF8)
       File.open("public/docs/#{name}", 'wb') { |f| f.write(file.read) }

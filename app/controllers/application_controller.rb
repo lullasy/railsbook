@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   # protect_from_forgery : http://blog.willnet.in/entry/20080509/1210338845
   protect_from_forgery with: :exception
+  # ルーティングのテストうまくいかないのでコメントアウト
+  # 8.5 でintegration testやるので戻しました
   before_action :check_logined
   rescue_from ActiveRecord::RecordNotFound, with: :id_invalid
 

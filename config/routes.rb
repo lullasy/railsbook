@@ -7,6 +7,15 @@ Rails.application.routes.draw do
   resources :authors
   resources :users, except: [ :show, :destroy ]
   resources :books
+  resources :hello do
+    get :list, on: :collection
+    get :index, on: :collection
+    get :view, on: :collection
+  end
+
+  post 'login/auth'
+  get 'login/logout'
+  get 'login/index'
 
   # resources :reviews do
   #   get :unapproval, on: :collection

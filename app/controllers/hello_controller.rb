@@ -12,6 +12,9 @@ class HelloController < ApplicationController
     @books = Book.all
   end
 
+  def show
+  end
+
   private
   def check_logined
     if session[:usr] then
