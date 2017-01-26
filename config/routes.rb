@@ -100,5 +100,6 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  match ':controller(/:action(/:id))', via: [ :get, :post, :patch ]
   root to: 'books#index'
 end
