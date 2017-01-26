@@ -12,7 +12,7 @@ class AdminLoginTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
     assert_equal '/hello/view', flash[:referer]
-    post '/login/auth', { username: 'yyamada', password: '12345', referer: 'hello/view' }
+    post '/login/auth', { username: 'yyamada', password: '12345', referer: '/hello/view' }
     assert_response :redirect
     assert_redirected_to controller: :hello, action: :view
     assert_equal users(:yyamada).id, session[:usr]
